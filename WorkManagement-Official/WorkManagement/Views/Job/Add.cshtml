@@ -1,0 +1,128 @@
+﻿@using DataAccess.Entities;
+@{
+    var account = ViewBag.Account as Account;
+}
+
+
+<style>
+    * {
+        margin:  0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .wrap-form-infor {
+        display:  flex;
+        justify-content: center;
+        align-items: center;
+        background: #F5F5F5;
+        min-height: 70vh;
+        margin: 40px 0;
+    }
+
+    #form-update-infor  {
+        border-radius: 10px;
+        background: #ffffff;
+        padding: 25px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        width: 50%;
+    }
+
+    .btn-toggle-change-password {
+        padding: 15px 20px;
+        width: fit-content;
+        background: #79E0EE;
+        cursor: pointer;
+    }
+
+    #wrap-password {
+        display: none;
+    }
+
+    .active {
+        display: block!important;
+    }
+
+    .my-button {
+        width: 100%;
+        background-color: #79E0EE;
+        color: #fff; /* Set the text color to white (you can adjust this as needed) */
+        padding: 10px; /* Adjust padding as per your design */
+        border: none; /* Remove border if you don't want any */
+        border-radius: 5px; /* Add rounded corners as per your design */
+        cursor: pointer; /* Show pointer cursor on hover */
+        /* Add any other desired styles here, like font-size, font-weight, etc. */
+    }
+</style>
+<div class="container">
+    <h1 class="mt-5 mb-5">Add Jobs</h1>
+</div>
+
+<div class="wrap-form-infor">
+    <form id="form-update-infor">
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" class="form-control" id="title">
+        </div>
+        <div class="form-group">
+            <label>Company</label>
+            <select class="form-select" id="companyKey">
+                @foreach (var i in ViewBag.Company as List<Company>)
+                {
+                    <option value="@i.CompanyKey">@i.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label >Deadline</label>
+            <input type="datetime-local" class="form-control" id="toTime">
+        </div>
+        <div class="form-group">
+            <label>Salary From</label>
+            <input type="number" class="form-control" id="salaryFrom">
+        </div>
+        <div class="form-group">
+            <label>Salary To</label>
+            <input type="number" class="form-control" id="salaryTo">
+        </div>
+        <div class="form-group">
+            <label>Work Type</label>
+            <select class="form-select" id="workType">
+                <option value="Part-time">Part-time</option>
+                <option value="Full-time">Full-time</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Candidates</label>
+            <input type="number" class="form-control" id="candidates">
+        </div>
+        <div class="form-group">
+            <label>Experience From</label>
+            <input type="number" class="form-control" id="experienceFrom">
+        </div>
+        <div class="form-group">
+            <label>Experience To</label>
+            <input type="number" class="form-control" id="experienceTo">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" class="form-control" id="description">
+        </div>
+        <div class="form-group">
+            <label>Required Candicate</label>
+            <input type="text" class="form-control" id="requiredCandicate">
+        </div>
+        <div class="form-group">
+            <label>Job Fields</label>
+            <select class="form-select" id="jobField">
+                @foreach (var i in ViewBag.Type)
+				{
+					<option value="@i">@i</option>
+				}
+            </select>
+        </div>
+        <div class="form-group">
+            <button class="my-button" id="btn_pass">Add New Job</button>
+        </div>
+    </form>
+</div>

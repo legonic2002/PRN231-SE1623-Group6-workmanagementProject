@@ -1,0 +1,66 @@
+﻿@using DataAccess.Entities;
+
+@{
+    List<Company> companies = ViewBag.Company;
+}
+<style>
+    .btn-custom-danger {
+        padding: 8px 14px;
+        background: #ED2B2A;
+        color: #fff;
+        border:  none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .btn-custom-edt {
+        padding: 8px 14px;
+        background: lightblue;
+        color: #fff;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .btn-custom-add {
+        padding: 8px 14px;
+        background: lightgreen;
+        color: #fff;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        margin-bottom:20px;
+    }
+</style>
+<div class="container mt-5 mb-5">
+    <h1 class="mt-5 mb-5">Company Manager</h1>
+    <a class="btn-custom-add" href="/company/add">Add New Company</a>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Location</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in companies)
+            {
+                <tr>
+                    <th scope="row">@c.CompanyKey</th>
+                    <td>@c.Name</td>
+                    <td>@c.Location</td>
+                    <td>@c.Description</td>
+                    <td>
+                        <a href="/company/@c.CompanyKey" class="btn-custom-edt" id="ac-@c.CompanyKey">Edit</a>
+                        <button class="btn-custom-danger btn_delete" id="ac-@c.CompanyKey">Delete</button>
+                    </td>
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+</div>
+

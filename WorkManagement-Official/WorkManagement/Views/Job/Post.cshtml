@@ -1,0 +1,139 @@
+﻿@using DataAccess.Entities;
+@{
+	var post = ViewBag.Post as Post;
+	List<string> exp = ViewBag.Exp as List<string>;
+	List<string> req = ViewBag.Req as List<string>;
+	var email = post.CompanyKeyNavigation.Name + "@gmail.com";
+	var web = post.CompanyKeyNavigation.Name + ".web.com";
+	var role = Context.Session.GetString("Role");
+
+}
+<main>
+
+	<!-- job post company Start -->
+	<div class="job-post-company pt-60 pb-120">
+		<div class="container">
+			<h1>Job Description</h1>
+		</div>
+		<div class="container">
+			<div class="row justify-content-between">
+				<!-- Left Content -->
+				<div class="col-xl-7 col-lg-8">
+					<!-- job single -->
+					<div class="single-job-items mb-50">
+						<div class="job-items">
+							<div class="company-img company-img-details">
+								<a href="#"><img src="/assets/img/icon/@post.CompanyKeyNavigation.ImageUrl" alt=""></a>
+							</div>
+							<div class="job-tittle">
+								<a href="#">
+									<h4>@post.Title</h4>
+								</a>
+								<ul>
+									<li>@post.CompanyKeyNavigation.Name</li>
+									<li><i class="fas fa-map-marker-alt"></i>@post.CompanyKeyNavigation.Location</li>
+									<li>$@post.SalaryFrom - $@post.SalaryTo</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- job single End -->
+
+					<div class="job-post-details">
+						<div class="post-details1 mb-50">
+							<!-- Small Section Tittle -->
+							<div class="small-section-tittle">
+								<h4>Job Description</h4>
+							</div>
+							<p>@post.Description</p>
+						</div>
+						<div class="post-details2  mb-50">
+							<!-- Small Section Tittle -->
+							<div class="small-section-tittle">
+								<h4>Required Knowledge, Skills, and Abilities</h4>
+							</div>
+							<ul>
+								@foreach (var item in req)
+								{
+									<li>@item</li>
+								}
+							</ul>
+						</div>
+						<div class="post-details2  mb-50">
+							<!-- Small Section Tittle -->
+							<div class="small-section-tittle">
+								<h4>Education + Experience</h4>
+							</div>
+							<ul>
+								@foreach (var item in exp)
+								{
+									<li>@item</li>
+								}
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<!-- Right Content -->
+				<div class="col-xl-4 col-lg-4">
+					<div class="post-details3  mb-50">
+						<!-- Small Section Tittle -->
+						<div class="small-section-tittle">
+							<h4>Job Overview</h4>
+						</div>
+						<ul>
+							<li>Application date: <span>@ViewBag.Date</span></li>
+							<li>Location : <span>@post.CompanyKeyNavigation.Location</span></li>
+							<li>Vacancy  : <span>@post.Candidates</span></li>
+							<li>Job nature : <span>@post.WorkType</span></li>
+						</ul>
+						<div class="apply-btn2">
+							<button type="button" class="btn" data-toggle="modal" data-target="#myModal">Apply Now</button>
+							<div class="modal" id="myModal">
+								<div class="modal-dialog">
+									<div class="modal-content">
+
+										<!-- Modal Header -->
+										<div class="modal-header">
+											<h4 class="modal-title">Input your CV</h4>
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+
+										<!-- Modal body -->
+										<div class="modal-body">
+											Drop file here
+										</div>
+
+										<!-- Modal footer -->
+										<div class="modal-footer">
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+							@if (!string.IsNullOrEmpty(role) && role.Equals("ADMIN"))
+							{
+								<button type="button" class="btn mybtn" id="delete_@post.PostKey">Delete</button>
+							}
+						</div>
+					</div>
+					<div class="post-details4  mb-50">
+						<!-- Small Section Tittle -->
+						<div class="small-section-tittle">
+							<h4>Company Information</h4>
+						</div>
+						<ul>
+							<li>Name: <span>@post.CompanyKeyNavigation.Name </span></li>
+							<li>Web : <span> @web</span></li>
+							<li>Email: <span>@email;</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- job post company End -->
+
+</main>

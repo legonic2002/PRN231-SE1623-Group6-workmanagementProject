@@ -1,0 +1,105 @@
+﻿@using DataAccess.Entities;
+@{
+    var account = ViewBag.Account as Account;
+}
+
+
+<style>
+    * {
+        margin:  0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .wrap-form-infor {
+        display:  flex;
+        justify-content: center;
+        align-items: center;
+        background: #F5F5F5;
+        min-height: 70vh;
+        margin: 40px 0;
+    }
+
+    #form-update-infor  {
+        border-radius: 10px;
+        background: #ffffff;
+        padding: 25px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        width: 50%;
+    }
+
+    .btn-toggle-change-password {
+        padding: 15px 20px;
+        width: fit-content;
+        background: #79E0EE;
+        cursor: pointer;
+    }
+
+    #wrap-password {
+        display: none;
+    }
+
+    .active {
+        display: block!important;
+    }
+
+    .my-button {
+        width: 100%;
+        background-color: #79E0EE;
+        color: #fff; /* Set the text color to white (you can adjust this as needed) */
+        padding: 10px; /* Adjust padding as per your design */
+        border: none; /* Remove border if you don't want any */
+        border-radius: 5px; /* Add rounded corners as per your design */
+        cursor: pointer; /* Show pointer cursor on hover */
+        /* Add any other desired styles here, like font-size, font-weight, etc. */
+    }
+</style>
+<div class="container">
+    <h1 class="mt-5 mb-5">My Profile</h1>
+</div>
+
+<div class="wrap-form-infor">
+    <form id="form-update-infor">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="First Name" value="@account.FirstName">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="Last Name" value="@account.LastName">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Email" value="@account.Email">
+        </div>
+        <div class="form-group">
+            <button class="form-control btn" id="btn_profile">Update</button>
+        </div>
+        <div class="form-group">
+            <div class="btn-toggle-change-password" onclick="handleToggleChangePassword()">Change password</div>
+            <div id="wrap-password">
+                <div class="form-group">
+                    <label for="oldPass">Old Password</label>
+                    <input type="password" class="form-control" id="oldPass" placeholder="Old Password">
+                </div>
+                <div class="form-group">
+                    <label for="newPass">New Password</label>
+                    <input type="password" class="form-control" id="newPass" placeholder="New Password">
+                </div>
+                <div class="form-group">
+                    <label for="cfPass">Confirm Password</label>
+                    <input type="password" class="form-control" id="cfPass" placeholder="Confirm Password">
+                </div>
+                <div class="form-group">
+                    <button class="my-button" id="btn_pass">Update Password</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    const wrapPassword = document.querySelector("#wrap-password");
+    const handleToggleChangePassword = () => {
+        wrapPassword.classList.toggle("active");
+    };
+</script>

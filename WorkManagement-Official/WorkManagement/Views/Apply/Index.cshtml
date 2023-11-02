@@ -1,0 +1,51 @@
+﻿@using DataAccess.Entities;
+@{
+	List<Post> posts = ViewBag.Posts as List<Post>;
+	string location = ViewBag.Location;
+}
+
+<main>
+
+	<!-- Hero Area Start-->
+	<div class="slider-area ">
+		<div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="/assets/img/hero/about.jpg">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="hero-cap text-center">
+							<h2>Get your job</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Hero Area End -->
+	<!-- Job List Area Start -->
+	<div id="post_list">
+		@foreach (var p in posts)
+		{
+			<div class="single-job-items mb-30">
+				<div class="job-items">
+					<div class="company-img">
+						<a href="#"><img src="/assets/img/icon/@p.CompanyKeyNavigation.ImageUrl" alt=""></a>
+					</div>
+					<div class="job-tittle job-tittle2">
+						<a href="/job/post/@p.PostKey">
+							<h4>@p.Title</h4>
+						</a>
+						<ul>
+							<li>@p.CompanyKeyNavigation.Name</li>
+							<li><i class="fas fa-map-marker-alt"></i>@p.CompanyKeyNavigation.Location</li>
+							<li>$@p.SalaryFrom - $@p.SalaryTo</li>
+						</ul>
+					</div>
+				</div>
+				<div class="items-link items-link2 f-right">
+					<a href="/job/post/@p.PostKey">@p.WorkType</a>
+				</div>
+			</div>
+		}
+	</div>
+
+</main>
