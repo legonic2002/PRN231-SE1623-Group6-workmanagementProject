@@ -6,7 +6,8 @@ namespace WorkManagement.Helper
 	{
 		public static List<string> PUBLIC_URL = new List<string>
 		{
-			"/api/Accounts/login",
+            "/api/Accounts",
+            "/api/Accounts/login",
 			"/auth/login",
 			"/api/auth/register",
 			"/auth/register",
