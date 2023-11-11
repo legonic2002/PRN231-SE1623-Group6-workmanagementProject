@@ -18,8 +18,11 @@ namespace WorkManagement.Controllers
         [HttpGet("job/post/{postKey}")]
         public IActionResult Post(int postKey)
         {
-			ViewBag.ScriptLink = "~/js/Post/post.js";
+            ViewBag.ScriptLink = "~/js/Post/post.js";
+            int? userId = HttpContext.Session.GetInt32("AccountKey");
 
+            ViewBag.Account = userId;
+			
 			if (postKey != 0) {
                 var post = _context.Posts.Include(x => x.CompanyKeyNavigation).Where(x => x.PostKey == postKey).FirstOrDefault();
                 ViewBag.Post = post;

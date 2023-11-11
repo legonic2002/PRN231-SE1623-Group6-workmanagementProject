@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using System.Linq;
 
 namespace WorkManagement.Controllers
@@ -23,11 +24,24 @@ namespace WorkManagement.Controllers
             {
                 accountKey = int.Parse(HttpContext.Session.GetInt32("AccountKey")!.ToString());
 			}
-            var listPostApplied = _context.AppliedAndCareds.Where(x => x.AccountKey == accountKey).Select(x => x.PostKey).ToList();
-			ViewBag.ScriptLink = "~/js/Job/list.js";
+            var listPostApplied = _context.AppliedAndCareds.Where(x => x.AccountKey == accountKey).ToList();
+			var listPost = _context.Posts.Include(x=> x.CompanyKeyNavigation).ToList();
+            var result = new List<Post>();
+            foreach (var item in listPostApplied)
+            {
+             foreach(var post in listPost)
+                {
+                    if(post.PostKey == item.PostKey)
+                    {
+                        result.Add(post);
+                    }
+                }
+                
+            }
+            ViewBag.ScriptLink = "~/js/Job/list.js";
 			List<Post> posts;
-			ViewBag.Posts = listPostApplied;
-			ViewBag.Count = listPostApplied.Count;
+			ViewBag.Posts = result;
+			ViewBag.Count = result.Count;
 			ViewBag.Locations = _context.Companies.Select(x => x.Location).Distinct().ToList();
 			ViewBag.Type = _context.Posts.Select(x => x.JobField).Distinct().ToList();
 			return View();

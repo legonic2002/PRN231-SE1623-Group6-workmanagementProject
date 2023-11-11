@@ -2,6 +2,7 @@
 @{
 	List<Post> posts = ViewBag.Posts as List<Post>;
 	string location = ViewBag.Location;
+	int count = ViewBag.Count;
 }
 
 <main>
@@ -23,28 +24,29 @@
 	<!-- Hero Area End -->
 	<!-- Job List Area Start -->
 	<div id="post_list">
-		@foreach (var p in posts)
-		{
-			<div class="single-job-items mb-30">
-				<div class="job-items">
-					<div class="company-img">
-						<a href="#"><img src="/assets/img/icon/@p.CompanyKeyNavigation.ImageUrl" alt=""></a>
+			@foreach (var p in posts)
+			{
+				<div class="single-job-items mb-30">
+					<div class="job-items">
+						<div class="company-img">
+							<a href="#"><img src="/assets/img/icon/@p.CompanyKeyNavigation.ImageUrl" alt=""></a>
+						</div>
+						<div class="job-tittle job-tittle2">
+							<a href="/job/post/@p.PostKey">
+								<h4>@p.Title</h4>
+							</a>
+							<ul>
+								<li>@p.CompanyKeyNavigation.Name</li>
+								<li><i class="fas fa-map-marker-alt"></i>@p.CompanyKeyNavigation.Location</li>
+								<li>$@p.SalaryFrom - $@p.SalaryTo</li>
+							</ul>
+						</div>
 					</div>
-					<div class="job-tittle job-tittle2">
-						<a href="/job/post/@p.PostKey">
-							<h4>@p.Title</h4>
-						</a>
-						<ul>
-							<li>@p.CompanyKeyNavigation.Name</li>
-							<li><i class="fas fa-map-marker-alt"></i>@p.CompanyKeyNavigation.Location</li>
-							<li>$@p.SalaryFrom - $@p.SalaryTo</li>
-						</ul>
+					<div class="items-link items-link2 f-right">
+						<a href="/job/post/@p.PostKey">@p.WorkType</a>
 					</div>
 				</div>
-				<div class="items-link items-link2 f-right">
-					<a href="/job/post/@p.PostKey">@p.WorkType</a>
-				</div>
-			</div>
+			}
 		}
 	</div>
 
